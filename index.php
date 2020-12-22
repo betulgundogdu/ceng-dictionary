@@ -7,10 +7,6 @@
 </head>
 <body>
     <div class="main">
-        <div class="settings">
-            <a href="login.php" class="item"> giriş</a>
-            <a href="signup.php" class="item"> kayıt ol</a>
-        </div>
         <div class="content">
             <?php 
                 include('components/left-section.php');
