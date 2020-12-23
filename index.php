@@ -13,7 +13,7 @@
             ?>
             <div class="right container">
                 <?php 
-                    $page = 'entry';
+                    $page = 'popular';
                     $path = 'components/' . $page . '.php';
                     include $path;
                 ?>

@@ -8,6 +8,8 @@
             <li class="item"><a href="category.html"> #ai </a></li>
             <li class="item"><a href="category.html"> #iot </a></li>
             <li class="item"><a href="category.html"> daha fazla </a></li>
+            <li class="item"><button type="submit"><i class="fa fa-search"></i></button>
+</li>
             <div class="settings">
                 <a href="login.php" class="item"> giriş</a>
                 <a href="signup.php" class="item"> kayıt ol</a>

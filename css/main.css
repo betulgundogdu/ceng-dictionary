@@ -43,6 +43,9 @@ a:hover {
 
 button {
     cursor: pointer;
+    background-color: transparent;
+    border: none;
+    color: var(--yellow);
 }
 
 .item {
@@ -296,18 +299,16 @@ button {
 } 
 
 .popular {
-    height: 90%;
+    height: 100%;
     width: 95%;
-    margin-top: 35px;
-    float: right;
-    right: 5%;
     overflow-x: hidden;
     overflow-y: scroll;
 }
 
 .popular > .item {
     width: 95%;
-    height: 150px;
+    height: auto;
+    margin: 25px 5px;
 }
 
 .popular > .item > a {
