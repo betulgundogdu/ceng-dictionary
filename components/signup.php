@@ -1,4 +1,4 @@
-<form class="form container" id="signup">
+<form class="user-form container" id="signup">
     <div class="title"> 
         <span>kayıt</span>
     </div>
