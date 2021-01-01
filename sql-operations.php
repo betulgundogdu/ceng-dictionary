@@ -17,8 +17,8 @@ function addUser($username, $email, $password) {
       return false;
     }
 
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
+    $stmt->close();
+    $conn->close();
 }
 
 // function removeUser($username) {
