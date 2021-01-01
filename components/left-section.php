@@ -1,18 +1,28 @@
 <div class="left container">
     <div class="left wrapper">
         <div class="categories">
-            <div class="item active"><a href="category.html"> #gündem </a></div>
-            <div class="item"><a href="category.html"> #os </a></div>
-            <div class="item"><a href="category.html"> #web </a></div>
-            <div class="item"><a href="category.html"> #mobil </a></div>
-            <div class="item"><a href="category.html"> #ai </a></div>
-            <div class="item"><a href="category.html"> #iot </a></div>
+            <?php 
+                include('./connect.php');
+
+                $sql = "SELECT title FROM Category";
+                $result = $conn -> query($sql);
+
+                if ($result-> num_rows > 0) {
+                    // output data of each row
+                    while($row = $result -> fetch_assoc()) {
+                        echo  "<div class='item'><a href='category.html'> #" . $row['title'] . "</a></div>";
+                    }
+                } else {    
+                    echo "0 results";
+                }      
+                $conn->close();        
+            ?>
             <div class="item"><a href="category.html"> daha fazla </a></div>
             <div class="item"><button type="submit"><i class="fa fa-search"></i></button></div>
-            <div class="settings">
-                <a href="login.php" class="item"> giriş</a>
-                <a href="signup.php" class="item"> kayıt ol</a>
-            </div>
+            <form class="settings">
+                <a href="?page=login" class="item"> giriş</a>
+                <a href="?page=signup" class="item"> kayıt ol</a>
+            </form>
             <div class="user-settings"> <!-- sadece üyeler-->
                 <button class="subject-btn">yeni başlık</button>
                 <button class="subject-btn">profilim</button>
@@ -21,7 +31,23 @@
 
         </div>
         <ul class="subjects">
-            <li class="item"><a href="entry.php"> deneme bir ki </a></li>
+            <?php 
+                include('./connect.php');
+
+                $sql = "SELECT title FROM Header";
+                $result = $conn -> query($sql);
+
+                if ($result-> num_rows > 0) {
+                    // output data of each row
+                    while($row = $result -> fetch_assoc()) {
+                        echo  "<li class='item'><a href='entry.php'>" . $row['title'] . "</a></li>";
+                    }
+                } else {    
+                    echo "0 results";
+                }      
+                $conn->close();        
+            ?>
+            <!-- <li class="item"><a href="entry.php"> deneme bir ki </a></li>
             <li class="item"><a href="entry.php"> deneme bir kideneme bir ki </a></li>
             <li class="item"><a href="entry.php"> deneme bir kideneme bir ki </a></li>
             <li class="item"><a href="entry.php"> #deneme bir kideneme bir ki</a></li>
@@ -38,8 +64,8 @@
             <li class="item"><a href="entry.php"> deneme bir kideneme bir ki </a></li>
             <li class="item"><a href="entry.php"> deneme bir kideneme bir ki </a></li>
             <li class="item"><a href="entry.php"> deneme bir ki </a></li>
-            <li class="item"><a href="entry.php"> deneme bir kideneme bir ki </a></li>
-            <li class="item more"><a href="#"> daha fazla  </a></li>
+            <li class="item"><a href="entry.php"> deneme bir kideneme bir ki </a></li> 
+            <li class="item more"><a href="#"> daha fazla  </a></li> -->
         </ul>
     </div>
 </div>

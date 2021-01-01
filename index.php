@@ -13,9 +13,14 @@
             ?>
             <div class="right container">
                 <?php 
-                    $page = 'entry';
+                    $page = $_GET['page'];
+                    if($page == ""){
+                        $page = 'popular';
+                    }
                     $path = 'components/' . $page . '.php';
-                    include $path;
+                    if((include $path) == FALSE){
+                        include('components/404.php');
+                    }
                 ?>
             </div>
         </div>

@@ -1,8 +1,8 @@
-<form class="user-form container" id="login">
+<form class="user-form container" id="login"  method="POST">
     <div class="title"> 
         <span>giriş</span>
     </div>
-    <label for="username"><b>e-mail</b></label>
+    <label for="username"><b>username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>
     <label for="psw"><b>şifre</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>

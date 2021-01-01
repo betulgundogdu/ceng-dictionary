@@ -429,6 +429,11 @@ button {
     width: 5em;
 }
 
+.help-block {
+    color:red;
+}
+
+
 /* Scrollbar */
 ::-webkit-scrollbar {
     width: 4px;
