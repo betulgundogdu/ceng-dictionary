@@ -34,9 +34,9 @@ function findUser($username){
     $stmt = $conn->prepare("SELECT * FROM User WHERE username = ?");
     $stmt->bind_param("s", $username);
     if ($stmt->execute()) {
-        $stmt->store_result();
-        $stmt->bind_result($id, $username, $email, $pwd, $date);
-        return $stmt;
+        $result = $stmt->get_result();
+        $resultarr = $result->fetch_all(MYSQLI_ASSOC);
+        return $resultarr;
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -72,6 +72,44 @@ function isValidEmail($email){
     $stmt->close();
     $conn->close();
 }
+
+//Header operations
+function createHeader($title, $entry) {
+    global $conn;
+    $date = date('Y-m-d');
+    $stmt = $conn->prepare("INSERT INTO Header (username, ) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $username , $email, $password, $date);
+    
+    if ($stmt->execute()) {
+      echo "New record created successfully";
+      return true;
+    } else {
+      echo "Error: " . $stmt->error;
+      return false;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+function addEntry($h_id, $text, $created_date, $u_id) {
+    global $conn;
+    $date = date('Y-m-d');
+    $stmt = $conn->prepare("INSERT INTO Header (h_id, text, created_date, u_id ) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $h_id , $text, $created_date, $u_id);
+    
+    if ($stmt->execute()) {
+      echo "New entry added successfully";
+      return true;
+    } else {
+      echo "Error: " . $stmt->error;
+      return false;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
 
 
 ?>

@@ -1,18 +1,17 @@
 <?php 
 
-    $username_err = $email_rr = $password_err = '';
+    $username_err = $email_err = $password_err = '';
     $username = $email = $password = '';
     include('./sql-operations.php');
 
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Validate username
-        $count = 0;
         if(empty(trim($_POST["username"]))){
             $username_err = "Please enter a username.";
         } else{
             $username_param = trim($_POST["username"]);
-            $count = findUser($username_param) -> num_rows;
+            $count = count(findUser($username_param));
             if($count < 1){
                 $username = $username_param;
             }
@@ -38,7 +37,7 @@
         if(empty(trim($_POST["password"]))){
             $password_err = "Please enter a password.";     
         } elseif(strlen(trim($_POST["password"])) < 6){
-            $password_err = "Password must have atleast 6 characters.";
+            $password_err = "Password must have at least 6 characters.";
         } else{
             $param_password = trim($_POST["password"]);
             $hash_password = password_hash($param_password, PASSWORD_DEFAULT);
@@ -47,7 +46,7 @@
         // Check input errors before inserting in database
         if(empty($username_err) && empty($password_err) && empty($email_err)){
             if(addUser($username, $email, $hash_password)){
-                // header("location: index.php");
+                header("location: index.php");
             }
             else {
                 echo "Something is wrong.";

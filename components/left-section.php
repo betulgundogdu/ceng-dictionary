@@ -19,16 +19,27 @@
             ?>
             <div class="item"><a href="category.html"> daha fazla </a></div>
             <div class="item"><button type="submit"><i class="fa fa-search"></i></button></div>
-            <form class="settings">
-                <a href="?page=login" class="item"> giriş</a>
-                <a href="?page=signup" class="item"> kayıt ol</a>
-            </form>
-            <div class="user-settings"> <!-- sadece üyeler-->
-                <button class="subject-btn">yeni başlık</button>
-                <button class="subject-btn">profilim</button>
-                <button class="subject-btn">çıkış</button>               
-            </div>
+            <div class="settings">
+            <?php
+                // Initialize the session
+                session_start();
+                
+                // Check if the user is logged in, if not then redirect him to login page
+                if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+                    echo '                 
+                        <a href="?page=login" class="item"> giriş</a>
+                        <a href="?page=signup" class="item"> kayıt ol</a>
+                    ';
+                } else {
+                    echo '
+                        <a class="item" href="?page=add-header">yeni başlık</a>
+                        <a class="item">profilim</a>
+                        <a class="item" href="?page=logout">çıkış</a>  
+                    ';
+                }
+            ?>
 
+            </div>
         </div>
         <ul class="subjects">
             <?php 
