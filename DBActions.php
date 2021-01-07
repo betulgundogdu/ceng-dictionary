@@ -9,11 +9,9 @@
 
         //user operations
         public function addUser($username, $email, $password) {
-            echo("iamherenow");
             $date = date('Y-m-d');
             $this->stmt = $this->conn->prepare("INSERT INTO User (username, email, password, created_at) VALUES (?, ?, ?, ?)");
             $this->stmt->bind_param("ssss", $username , $email, $password, $date);
-            echo("iamherenowstill");
             if ($this->stmt->execute()) {
               echo "New record created successfully";
               return true;
