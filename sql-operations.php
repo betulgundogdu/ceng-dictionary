@@ -4,9 +4,9 @@ include('./connect.php');
 
 // User Operations
 function addUser($username, $email, $password) {
-    global $conn;
+    global $mysqli;
     $date = date('Y-m-d');
-    $stmt = $conn->prepare("INSERT INTO User (username, email, password, created_at) VALUES (?, ?, ?, ?)");
+    $stmt = $mysqli->prepare("INSERT INTO User (username, email, password, created_at) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $username , $email, $password, $date);
     
     if ($stmt->execute()) {
@@ -18,7 +18,7 @@ function addUser($username, $email, $password) {
     }
 
     $stmt->close();
-    $conn->close();
+    $mysqli->close();
 }
 
 // function removeUser($username) {
@@ -30,8 +30,8 @@ function addUser($username, $email, $password) {
 // }
 
 function findUser($username){
-    global $conn;
-    $stmt = $conn->prepare("SELECT * FROM User WHERE username = ?");
+    global $mysqli;
+    $stmt = $mysqli->prepare("SELECT * FROM User WHERE username = ?");
     $stmt->bind_param("s", $username);
     if ($stmt->execute()) {
         $result = $stmt->get_result();
@@ -51,8 +51,8 @@ function findUser($username){
 // }
 
 function isValidEmail($email){
-    global $conn;
-    $stmt = $conn->prepare("SELECT u_id FROM User WHERE email = ?");
+    global $mysqli;
+    $stmt = $mysqli->prepare("SELECT u_id FROM User WHERE email = ?");
     $stmt->bind_param("s", $email);
     
     if ($stmt->execute()) {
@@ -70,12 +70,12 @@ function isValidEmail($email){
     }
     
     $stmt->close();
-    $conn->close();
+    $mysqli->close();
 }
 
 //Header operations
 function createHeader($title, $entry) {
-    global $conn;
+    global $mysqli;
     $date = date('Y-m-d');
     $stmt = $conn->prepare("INSERT INTO Header (username, ) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $username , $email, $password, $date);
@@ -89,11 +89,13 @@ function createHeader($title, $entry) {
     }
 
     $stmt->close();
-    $conn->close();
+    $mysqli->close();
 }
 
+
+//Entry operations
 function addEntry($h_id, $text, $created_date, $u_id) {
-    global $conn;
+    global $mysqli;
     $date = date('Y-m-d');
     $stmt = $conn->prepare("INSERT INTO Header (h_id, text, created_date, u_id ) VALUES (?, ?, ?, ?)");
     $stmt->bind_param("ssss", $h_id , $text, $created_date, $u_id);
@@ -107,7 +109,7 @@ function addEntry($h_id, $text, $created_date, $u_id) {
     }
 
     $stmt->close();
-    $conn->close();
+    $mysqli->close();
 }
 
 

@@ -5,7 +5,7 @@
                 include('./connect.php');
 
                 $sql = "SELECT title FROM Category";
-                $result = $conn -> query($sql);
+                $result = $mysqli -> query($sql);
 
                 if ($result-> num_rows > 0) {
                     // output data of each row
@@ -15,7 +15,7 @@
                 } else {    
                     echo "0 results";
                 }      
-                $conn->close();        
+                $mysqli->close();        
             ?>
             <div class="item"><a href="category.html"> daha fazla </a></div>
             <div class="item"><button type="submit"><i class="fa fa-search"></i></button></div>
@@ -46,7 +46,7 @@
                 include('./connect.php');
 
                 $sql = "SELECT title FROM Header";
-                $result = $conn -> query($sql);
+                $result = $mysqli -> query($sql);
 
                 if ($result-> num_rows > 0) {
                     // output data of each row
@@ -56,7 +56,7 @@
                 } else {    
                     echo "0 results";
                 }      
-                $conn->close();        
+                $mysqli->close();        
             ?>
             <!-- <li class="item"><a href="entry.php"> deneme bir ki </a></li>
             <li class="item"><a href="entry.php"> deneme bir kideneme bir ki </a></li>

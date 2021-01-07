@@ -1,8 +1,9 @@
 <?php 
-
+    include('./connect.php');
+    include('./DBActions.php');
     $username_err = $email_err = $password_err = '';
-    $username = $email = $password = '';
-    include('./sql-operations.php');
+    $username = $email = $hash_password = '';
+    $dbActions = new DBActions($mysqli); 
 
     // Processing form data when form is submitted
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -11,7 +12,8 @@
             $username_err = "Please enter a username.";
         } else{
             $username_param = trim($_POST["username"]);
-            $count = count(findUser($username_param));
+            $result = $dbActions->findUser($username_param);
+            $count = count($result);
             if($count < 1){
                 $username = $username_param;
             }
@@ -25,7 +27,7 @@
             $email_err = "Please enter a email.";
         } else{
             $email_param = trim($_POST["email"]);
-            if(isValidEmail($email_param)){
+            if( $dbActions->isValidEmail($email_param)){
                 $email = $email_param;
             }
             else {
@@ -45,14 +47,14 @@
         
         // Check input errors before inserting in database
         if(empty($username_err) && empty($password_err) && empty($email_err)){
-            if(addUser($username, $email, $hash_password)){
+            if($dbActions->addUser($username, $email, $hash_password)){
                 header("location: index.php");
             }
             else {
-                echo "Something is wrong.";
+                echo("Something is wrong.");
             }
-
         }
+        $mysqli->close();
     }
 ?>
 

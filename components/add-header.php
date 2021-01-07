@@ -32,7 +32,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     if(!empty($new_header) && !empty($first_entry)){
         include('./connect.php');
-        $stmt = $conn -> prepare("INSERT INTO ");
+        $stmt = $mysqli -> prepare("INSERT INTO ");
     }
 
 

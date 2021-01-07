@@ -18,9 +18,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $entered_username = trim($_POST["username"]);
     $entered_password = trim($_POST["password"]);
 
-    include('./sql-operations.php');
-    $result = findUser($entered_username);
-    
+    include('./connect.php');
+    include('./DBActions.php');
+    $dbActions = new DBActions($mysqli); 
+    $result = $dbActions->findUser($entered_username);
     $u_id = $result[0]['u_id'];                    
     $username = $result[0]['username'];
     $password = $result[0]['password'];
@@ -46,6 +47,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Display an error message if username doesn't exist
         $username_err = "No account found with that username.";
     }
+
+    $mysqli->close();
 }
 ?>
 
