@@ -1,5 +1,5 @@
 <?php
-  $servername = "localhost";
+  $servername = "127.0.0.1";
   $admin = "root";
   $psw = "root";
   $dbname = "ceng_dict";

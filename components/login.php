@@ -21,7 +21,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     include('./connect.php');
     include('./DBActions.php');
     $dbActions = new DBActions($mysqli); 
-    $result = $dbActions->findUser($entered_username);
+    $result = $dbActions->getUser($entered_username);
     $u_id = $result[0]['u_id'];                    
     $username = $result[0]['username'];
     $password = $result[0]['password'];

@@ -4,13 +4,16 @@
             <?php 
                 include('./connect.php');
 
-                $sql = "SELECT title FROM Category";
+                $sql = "SELECT c_id, title FROM Category";
                 $result = $mysqli -> query($sql);
 
                 if ($result-> num_rows > 0) {
-                    // output data of each row
                     while($row = $result -> fetch_assoc()) {
-                        echo  "<div class='item'><a href='category.html'> #" . $row['title'] . "</a></div>";
+                        if($row['c_id'] == $category){
+                            echo  "<div class='item active'><a href='?category=". $row['c_id'] . "'>" . $row['title'] . "</a></div>"; 
+                        } else {
+                            echo  "<div class='item'><a href='?category=". $row['c_id'] . "'> " . $row['title'] . "</a></div>";
+                        }
                     }
                 } else {    
                     echo "0 results";
@@ -44,19 +47,28 @@
         <ul class="subjects">
             <?php 
                 include('./connect.php');
+                $category = $_GET['category'];
+                if($category == ""){
+                    $category = 1;
+                }
+                $stmt = $mysqli->prepare("SELECT h_id, title FROM Header WHERE c_id = ?");
+                $stmt->bind_param("s", $category);
+                if ($stmt->execute()) {
+                    $result = $stmt->get_result();
+                    if (count($result) > 0) {
+                        while($row = $result -> fetch_assoc()) {
+                            echo  "<li class='item'><a href='?page=entry&entry=". $row['h_id'] . "'>" . $row['title'] . "</a></li>";
+                        }
+                    } else {    
+                        echo "0 results";
+                    }  
+                    $stmt->close();    
+                    $mysqli->close();               
+                } else {
+                    echo "Error: " . $this->stmt->error;
+                }
 
-                $sql = "SELECT title FROM Header";
-                $result = $mysqli -> query($sql);
-
-                if ($result-> num_rows > 0) {
-                    // output data of each row
-                    while($row = $result -> fetch_assoc()) {
-                        echo  "<li class='item'><a href='entry.php'>" . $row['title'] . "</a></li>";
-                    }
-                } else {    
-                    echo "0 results";
-                }      
-                $mysqli->close();        
+      
             ?>
             <!-- <li class="item"><a href="entry.php"> deneme bir ki </a></li>
             <li class="item"><a href="entry.php"> deneme bir kideneme bir ki </a></li>

@@ -12,7 +12,7 @@
             $username_err = "Please enter a username.";
         } else{
             $username_param = trim($_POST["username"]);
-            $result = $dbActions->findUser($username_param);
+            $result = $dbActions->getUser($username_param);
             $count = count($result);
             if($count < 1){
                 $username = $username_param;

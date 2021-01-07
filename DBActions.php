@@ -30,7 +30,7 @@
         //     mysqli_close($conn);
         // }
         
-        public function findUser($username){
+        public function getUser($username){
             $this->stmt = $this->conn->prepare("SELECT * FROM User WHERE username = ?");
             $this->stmt->bind_param("s", $username);
             if ($this->stmt->execute()) {
@@ -53,7 +53,7 @@
         
 
         //header operations
-        public function createHeader($title, $entry) {
+        public function addHeader($title, $entry) {
             $date = date('Y-m-d');
             $stmt = $conn->prepare("INSERT INTO Header (username, ) VALUES (?, ?, ?, ?)");
             $stmt->bind_param("ssss", $username , $email, $password, $date);
@@ -66,6 +66,19 @@
               return false;
             }
         
+            $this->stmt->close();
+        }
+
+        public function getAllHeaders($c_id){
+            $this->stmt = $this->conn->prepare("SELECT * FROM Header WHERE c_id = ?");
+            $this->stmt->bind_param("s", $c_id);
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result();
+                $resultarr = $result->fetch_all(MYSQLI_ASSOC);
+                return $resultarr;
+            } else {
+                echo "Error: " . $this->stmt->error;
+            }
             $this->stmt->close();
         }
         
@@ -82,6 +95,19 @@
               echo "Error: " . $stmt->error;
               return false;
             } 
+            $this->stmt->close();
+        }
+
+        public function getAllEntries($h_id){
+            $this->stmt = $this->conn->prepare("SELECT * FROM Entry WHERE $h_id = ?");
+            $this->stmt->bind_param("s", $h_id);
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result();
+                $resultarr = $result->fetch_all(MYSQLI_ASSOC);
+                return $resultarr;
+            } else {
+                echo "Error: " . $this->stmt->error;
+            }
             $this->stmt->close();
         }
 
