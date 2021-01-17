@@ -62,7 +62,7 @@
     <div class="title"> 
         <span>kayıt</span>
     </div>
-    <label for="username"><b>username</b></label>
+    <label for="username"><b>kullanıcı adı</b></label>
     <input type="text" placeholder="Enter Username" name="username" value="<?php echo $username; ?>" required>
     <span class="help-block"><?php echo $username_err; ?></span>
 

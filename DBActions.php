@@ -1,5 +1,4 @@
-<?php
-    
+<?php    
     class DBActions {
 
         public function __construct($mysqli){

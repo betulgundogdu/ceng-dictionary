@@ -32,13 +32,6 @@
 </div>
 
 <div class="entries">
-    <div class="entry">
-        <p class="entry-content"> hello world</p>
-        <div class="right detail">
-            <span class="username">username</span><span class="time"> | 06.03.23 23:21</span>
-            <span>| <a class="edit">delete </a></span> <!--mod ve admin-->
-        </div>
-    </div>
 <?php
     $stmt = $mysqli->prepare("SELECT text, created_date, u_id FROM Entry WHERE h_id = ?");
     $stmt->bind_param("s", $h_id);

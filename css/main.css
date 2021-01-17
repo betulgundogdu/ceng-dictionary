@@ -48,6 +48,11 @@ button {
     color: var(--yellow);
 }
 
+.icon{
+    color: var(--yellow) !important;
+    font-size: 18px !important;
+}
+
 .item {
     margin:5px;
     letter-spacing: 1px;
@@ -250,20 +255,20 @@ button {
  .entries {
     width: 95%;
     right: 5%;
-    height: 95%;
+    height: 80%;
     overflow: hidden;
     overflow-y: scroll;
     margin:0;
     margin-bottom: 10px;
-    display:flex;
-    flex-wrap: wrap;
  }
 
  .entry {
+    display:inline-block;
     height: auto;
     width: 95%;
     padding-right: 5%;
     padding: 2px 0px;
+    margin:10px 0px;
     text-align: left;
  }
 
@@ -274,6 +279,10 @@ button {
      text-align: left;
      float:left;
  }
+
+.entry-content{
+    line-break: anywhere;
+}
 
  .username {
     color: var(--yellow);

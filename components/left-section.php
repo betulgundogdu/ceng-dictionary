@@ -16,17 +16,23 @@
                 if ($result-> num_rows > 0) {
                     while($row = $result -> fetch_assoc()) {
                         if($row['c_id'] == $category){
-                            echo  "<div class='item active'><a href='?category=". $row['c_id'] . "'>" . $row['title'] . "</a></div>"; 
+                            echo  "<div class='item active'><a href='?category=". $row['c_id'] . "'>#" . $row['title'] . "</a></div>"; 
                         } else {
-                            echo  "<div class='item'><a href='?category=". $row['c_id'] . "'> " . $row['title'] . "</a></div>";
+                            echo  "<div class='item'><a href='?category=". $row['c_id'] . "'>#" . $row['title'] . "</a></div>";
                         }
                     }
                 } else {    
                     echo "0 results";
                 }      
             ?>
-            <div class="item"><a href="category.html"> daha fazla </a></div>
-            <div class="item"><button type="submit"><i class="fa fa-search"></i></button></div>
+            <!-- <div class="item"><a href="category.html"> daha fazla </a></div>  -->
+            <div class="item"><button type="submit" class="icon"><ion-icon name="search-sharp" ></ion-icon></button></div>
+            <div class="item">
+                <a href='#' class="icon">
+                    <ion-icon name="chatbox-outline"></ion-icon>
+                    <!-- <ion-icon name="chatbox"></ion-icon> -->
+                </a>
+            </div>
             <div class="settings">
             <?php
                 // Initialize the session
@@ -58,7 +64,7 @@
                     $result = $stmt->get_result();
                     if (count($result) > 0) {
                         while($row = $result -> fetch_assoc()) {
-                            echo  "<li class='item'><a href='?page=entry&baslik=". $row['h_id'] . "'>" . $row['title'] . "</a></li>";
+                            echo  "<li class='item '><a href='?page=entry&baslik=". $row['h_id'] . "'> > " . $row['title'] . "</a></li>";
                         }
                     } else {    
                         echo "0 results";

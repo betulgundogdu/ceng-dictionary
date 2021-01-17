@@ -64,10 +64,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <input type="password" placeholder="Enter Password" name="password" required>
     <span class="help-block"><?php echo $password_err; ?></span>
 
-    <label>
+    <!-- <label>
         <input type="checkbox" checked="checked" name="remember"> hatırla beni
-    </label>                     
+    </label>                      -->
     <button type="submit">giriş</button>
-    <span class="psw">unuttun mu <a href="#">şifreni?</a></span>
+    <!-- <span class="psw">unuttun mu <a href="#">şifreni?</a></span> -->
   </div>
 </form>
