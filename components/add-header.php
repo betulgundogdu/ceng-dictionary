@@ -1,41 +1,49 @@
 <?php
 session_start();
 
-$header_title = $entry_text = $header = $first_entry = $header_err = $entry_err = '';
- 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+    $u_id = $_SESSION["id"];
+
+    $sql = "SELECT c_id, title FROM Category";
+    $result = $mysqli -> query($sql);
+
+    $selected_category =$header_title = $entry_text = '';
+    $category_err =$header_err = $entry_err = '';
+
     echo '
-        <form class="add-header" action="?page=entry" method="POST"> 
+        <form class="add-header" method="POST"> 
             <p class="title">yeni bir başlık aç     </p><br/>
-            <label for="new-header">başlık:</label>
-            <input type="text" id="header" name="header" value="' . $header_title . '" required /><br/>
-            <label for="new-header">entry:</label>
-            <textarea id="header" name="f-entry" rows="10" cols="30" value="'. $entry_text .'" required></textarea><br/>
-            <button type="submit">gönder</button>
+            <label for="header-title">başlık:</label>
+            <input type="text" id="header-title" name="header-title" required /><br/>
+            
+            <label for="category-dropdown">kategori:</label>
+            <select class="dropdown" name="selected-category" id="category-dropdown">';
+
+    while($row = $result -> fetch_assoc()) {
+        echo '<option class="tags" value="' . $row['c_id'] . '">' .  $row['title'] . '</option>';
+    }
+
+    echo '</select><br/>
+            <label for="entry-text">entry:</label>
+            <textarea id="entry-form" name="entry-text" rows="10" cols="30"  required></textarea><br/>
+            <button type="submit" value="Submit">gönder</button>
         </form> 
     '; 
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $dbActions = new DBActions($mysqli);
+        $header_title = $_POST["header-title"];
+        $entry_text = $_POST["entry-text"];
+        $selected_category =(int)$_POST["selected-category"];
+        $dbActions->addHeader($header_title, $selected_category);
+        
+        $header_info = $dbActions->getHeaderWithTitle($header_title);
+        $h_id = $header_info['h_id'];
+        $dbActions->addEntry($h_id, $entry_text, $u_id);     
+    }
+    $mysqli->close();
 } 
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    $new_header = trim($_POST["header"]);
-    $first_entry = trim($_POST["f-entry"]);
-
-    if(empty($new_header)){
-        $header_err = "Please enter a header";
-    }
-
-    if(empty($first_entry)){
-        $entry_err = "You should enter the first entry about your header.";
-    }
-
-    if(!empty($new_header) && !empty($first_entry)){
-        include('./connect.php');
-        $stmt = $mysqli -> prepare("INSERT INTO ");
-    }
-
-
-}
 
 ?>

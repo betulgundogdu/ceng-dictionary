@@ -21,95 +21,106 @@
             $this->stmt->close();
         }
         
-        // function removeUser($username) {
-        //     include('./connect.php');
-        //     echo "Hello world!";
-        
-        //     mysqli_stmt_close($stmt);
-        //     mysqli_close($conn);
-        // }
-        
         public function getUser($username){
             $this->stmt = $this->conn->prepare("SELECT * FROM User WHERE username = ?");
             $this->stmt->bind_param("s", $username);
             if ($this->stmt->execute()) {
-                $result = $this->stmt->get_result();
-                $resultarr = $result->fetch_all(MYSQLI_ASSOC);
+                $result = $this->stmt->get_result(); // get the mysqli result
+                $resultarr = $result->fetch_assoc();
+                $this->stmt->close();
                 return $resultarr;
             } else {
+                $this->stmt->close();
                 echo "Error: " . $this->stmt->error;
             }
-            $this->stmt->close();
         }
         
-        // function updateUser($username, $email, $password){
-        //     include('./connect.php');
-        
-        //     mysqli_stmt_close($stmt);
-        //     mysqli_close($conn);
-        
-        // }
-        
+        //category operations
+        public function getAllCategories(){
+            $sql = "SELECT c_id, title FROM Category";
+            $result = $this->conn->query($sql);
+            return $result;
+        }
 
         //header operations
-        public function addHeader($title, $entry) {
-            $date = date('Y-m-d');
-            $stmt = $conn->prepare("INSERT INTO Header (username, ) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $username , $email, $password, $date);
+        public function addHeader($title, $c_id) {
+            $this->stmt = $this->conn->prepare("INSERT INTO Header (title, c_id) VALUES (?, ?)");
+            $this->stmt->bind_param("si", $title, $c_id);
             
-            if ($stmt->execute()) {
+            if ($this->stmt->execute()) {
               echo "New record created successfully";
+              $this->stmt->close(); 
               return true;
             } else {
-              echo "Error: " . $stmt->error;
+              echo "Error: " . $this->stmt->error;
+              $this->stmt->close();
               return false;
             }
         
-            $this->stmt->close();
         }
+
+        public function getHeaderWithTitle($title){
+            $this->stmt = $this->conn->prepare("SELECT * FROM Header WHERE title = ?");
+            $this->stmt->bind_param("s", $title);
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result(); // get the mysqli result
+                return $result;
+            } else {
+                echo "Error: " . $this->stmt->error;
+                $this->stmt->close();    
+            }
+        }
+        
+        public function getHeaderWithId($h_id){
+            $this->stmt = $this->conn->prepare("SELECT * FROM Header WHERE h_id = ?");
+            $this->stmt->bind_param("s", $h_id);
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result(); // get the mysqli result
+                return $result;
+            } else {
+                echo "Error: " . $this->stmt->error;
+                $this->stmt->close();    
+            }
+        }        
 
         public function getAllHeaders($c_id){
             $this->stmt = $this->conn->prepare("SELECT * FROM Header WHERE c_id = ?");
             $this->stmt->bind_param("s", $c_id);
             if ($this->stmt->execute()) {
                 $result = $this->stmt->get_result();
-                $resultarr = $result->fetch_all(MYSQLI_ASSOC);
-                return $resultarr;
+                return $result;
             } else {
                 echo "Error: " . $this->stmt->error;
             }
-            $this->stmt->close();
         }
         
         //entry operations
-        public function addEntry($h_id, $text, $created_date, $u_id) {
-            $date = date('Y-m-d');
-            $stmt = $conn->prepare("INSERT INTO Header (h_id, text, created_date, u_id ) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssss", $h_id , $text, $created_date, $u_id);
+        public function addEntry($h_id, $text, $u_id) {
+            $created_date = date('Y-m-d');
+            $this->stmt = $this->conn->prepare("INSERT INTO Entry (h_id, text, created_date, u_id ) VALUES (?, ?, ?, ?)");
+            $this->stmt->bind_param("ssss", $h_id , $text, $created_date, $u_id);
             
-            if ($stmt->execute()) {
-              echo "New entry added successfully";
+            if ($this->stmt->execute()) {
+              $this->stmt->close();
               return true;
             } else {
-              echo "Error: " . $stmt->error;
+              echo "Error: " . $this->stmt->error;
+              $this->stmt->close();
               return false;
             } 
-            $this->stmt->close();
         }
 
         public function getAllEntries($h_id){
-            $this->stmt = $this->conn->prepare("SELECT * FROM Entry WHERE $h_id = ?");
+            $this->stmt = $this->conn->prepare("SELECT * FROM Entry WHERE h_id = ?");
             $this->stmt->bind_param("s", $h_id);
             if ($this->stmt->execute()) {
                 $result = $this->stmt->get_result();
-                $resultarr = $result->fetch_all(MYSQLI_ASSOC);
-                return $resultarr;
+                return $result;
             } else {
+                $this->stmt->close();
                 echo "Error: " . $this->stmt->error;
             }
-            $this->stmt->close();
         }
-
 
         //aux methods
         public function isValidEmail($email){

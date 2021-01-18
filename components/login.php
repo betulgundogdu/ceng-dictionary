@@ -1,7 +1,8 @@
 <?php
 // Initialize the session
 session_start();
- 
+global $mysqli;
+
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
     header("location: index.php");
@@ -18,8 +19,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $entered_username = trim($_POST["username"]);
     $entered_password = trim($_POST["password"]);
 
-    include('./connect.php');
-    include('./DBActions.php');
     $dbActions = new DBActions($mysqli); 
     $result = $dbActions->getUser($entered_username);
     $u_id = $result[0]['u_id'];                    

@@ -53,6 +53,11 @@ button {
     font-size: 18px !important;
 }
 
+.dropdown{
+    margin: 10px 0;
+    padding: 5px;
+}
+
 .item {
     margin:5px;
     letter-spacing: 1px;
@@ -82,7 +87,7 @@ button {
 
 .settings {
     width:100%;
-    height:8%;
+    height:20%;
     display: flex;
     align-items: center;
     flex-direction:column;
@@ -103,11 +108,23 @@ button {
     /* border-right: 1px solid var(--blue); */
 }
 
+.tools{
+    height: 80%;
+    width:40%;
+    left: 0;
+    right:0;
+    margin: 0 auto;
+}
+
+.categories {
+    width:100%;
+    height: 97%;
+}
+
 .categories > .item {
     width:100%;
     height: 10%;
     padding:0 ;
-    margin:0;
     /* font-weight: bold; */
 }
 
@@ -305,7 +322,7 @@ button {
 }
 
 .category {
-    height: 90%;
+    height: 80%;
     width: 100%;
     margin-top: 35px;
     float: right;
@@ -323,7 +340,7 @@ button {
 .category > .item {
     left: 0;
     width: 100%;
-    height: 30px;
+    height: 20px;
 }
 
 .category > .item > a {

@@ -1,6 +1,4 @@
 <?php 
-    include('./connect.php');
-    include('./DBActions.php');
     $username_err = $email_err = $password_err = '';
     $username = $email = $hash_password = '';
     $dbActions = new DBActions($mysqli); 

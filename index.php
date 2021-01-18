@@ -1,3 +1,12 @@
+<?php 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+require_once(__DIR__.'/connect.php');
+require_once(__DIR__.'/DBActions.php');
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,18 +19,21 @@
     <div class="main">
         <div class="content">
             <?php 
-                include('components/left-section.php');
+                require('components/left-section.php');
             ?>
             <div class="right container">
                 <?php 
                     $page = $_GET['page'];
+
+
                     if($page == ""){
                         $page = 'popular';
                     }
                     $path = 'components/' . $page . '.php';
-                    if((include $path) == FALSE){
-                        include('components/404.php');
+                    if((require $path) == FALSE){
+                        require('components/404.php');
                     }
+                    
                 ?>
             </div>
         </div>
