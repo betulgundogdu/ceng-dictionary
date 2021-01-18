@@ -1,39 +1,42 @@
-    <div class="title info"> 
-        <div>username</div>
-        <a class="edit"> yetkilendir </a>|<a class="edit"> banla</a> <!-- sadece admin-->
-    </div>
-    <div class="entries">
-        <div class="entry">
-            <a href="#" class="header"> deneme bir kideneme bir ki </a>
-            <p class="entry-content"> Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus.</p>
-            <div class="right">
-                <span class="time"> 06.03.23 23:21</span>
-                <a class="edit">delete </a>|<a class="edit"> edit</a> <!-- sadece userın kendisi-->
-            </div>
-        </div>
-        <div class="entry">
-            <a href="#" class="header"> deneme bir kideneme bir ki </a>
-            <p class="entry-content"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus.</p>
-            <div class="right">
-                <span class="time"> 06.03.23 23:21</span>
-                <a class="edit">delete </a>|<a class="edit"> edit</a>
-            </div>
-        </div>
-        <div class="entry">
-            <a href="#" class="header"> deneme bir kideneme bir ki </a>
-            <p class="entry-content"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus.</p>
-            <div class="right">
-                <span class="time"> 06.03.23 23:21</span>
-                <a class="edit">delete </a>|<a class="edit"> edit</a>
-            </div>
-        </div>
-        <div class="entry">
-            <a href="#" class="header"> deneme bir kideneme bir ki </a>
-            <p class="entry-content"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus.</p>
-            <div class="right">
-                <span class="time"> 06.03.23 23:21</span>
-                <a class="edit">delete </a>|<a class="edit"> edit</a>
-            </div>
-        </div>
-    </div>
-  </div>
+ <?php 
+    //page owner
+    $profil_owner = $_GET['user'];
+    $user = $dbActions->getUserWithName($profil_owner);
+    $user_info = $user->fetch_assoc();
+    $user_id = $user_info['u_id'];
+    $entries_result = $dbActions->getEntriesByUserId($user_id);
+ ?>
+ 
+<div class="title info"> 
+    <div><?php echo($profil_owner) ?></div>
+    <?php
+    if($current_user_type == 'admin' && $session_username != $profil_owner){ 
+        echo '
+        <button type="button" class="edit"> yetkilendir </a> | <button type="button" class="edit"> banla</a> <!-- sadece admin--> ';
+    }
+    ?>
+</div>
+<div class="entries">
+    <?php
+        while($row = $entries_result->fetch_assoc()) {
+            $h_id = $row['h_id']; 
+            $c_id = $row['c_id'];
+            $header_info = $dbActions->getHeaderWithId($h_id);
+            $header = $header_info->fetch_assoc();
+            $h_title = $header['title'];
+
+            echo '
+            <div class="entry">
+                <a href="?page=entry&category=' . $c_id . '&baslik=' . $h_id . '" class="header"> ' . $h_title . '</a>
+                <p class="entry-content"> ' . $row["text"] . '</p>
+                <div class="right">
+                    <span class="time"> ' . $row["created_date"] . '</span> ';
+                    if($session_username == $profil_owner){   
+                    echo '<a class="edit">delete </a>|<a class="edit"> edit</a> <!-- sadece userın kendisi--> ';
+                    }
+                    echo '
+                </div>
+            </div> ';
+        }
+    ?>
+</div>

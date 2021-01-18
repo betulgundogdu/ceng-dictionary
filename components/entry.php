@@ -2,16 +2,19 @@
     global $mysqli;
     $h_id = $_GET['baslik'];
     $category = $_GET['category'];
-    var_dump($h_id);
-    var_dump($category);
+
     $dbActions = new DBActions($mysqli);
     $header = $dbActions->getHeaderWithId($h_id);
-    $h_title = $header['title'];
+    $header_info = $header->fetch_assoc();
+    $h_title = $header_info['title'];
 ?>
 
 <div class="title"> 
     <div><?php echo $h_title ?></div>
-    <a class="edit"> düzenle </a>|<a class="edit"> sil</a> <!-- sadece mod/admin-->
+    <?php
+    if($current_user_type == 'admin' || $current_user_type == 'mod'){ 
+        echo '<a class="edit"> düzenle </a>|<a class="edit"> sil</a> <!-- sadece mod/admin--> ';
+    } ?>
 </div>
 
 <div class="entries">
@@ -19,23 +22,30 @@
     $entries = $dbActions->getAllEntries($h_id);
     if (count($entries) > 0) {
         while($row = $entries->fetch_assoc()) {
-            echo(" 
-                <div class='entry'>
-                    <p class='entry-content'>" . $row['text'] . "</p>
-                    <div class='right detail'>
-                        <span class='username'>" . $row['u_id'] . "</span>
-                        <span class='time'> | " . $row['created_date'] . "</span>
-                        <span> | <a class='edit'>delete </a></span> <!--mod ve admin-->
+            $uid_owner = $row['u_id'];
+            $user_result = $dbActions->getUserWithId($uid_owner);
+            $user_owner = $user_result->fetch_assoc();
+            $username_owner = $user_owner['username'];
+
+            echo('
+                <div class="entry">
+                    <p class="entry-content"> ' . $row["text"] . '</p>
+                    <div class="right detail">
+                        <a class="username" href="?page=profil&user=' . $username_owner . ' "> ' . $username_owner . '</a>
+                        <span class="time"> | ' . $row["created_date"] . '</span> ');
+                        if($current_user_type == 'admin' || $current_user_type == 'mod' || $session_username  == $username_owner){ 
+                            echo '<span> | <a class="edit"> delete </a></span> <!--mod ve admin--> ';
+                        } 
+            echo ('
                     </div>
                 </div>                     
-            ");
+            ');
         }
     } else {    
         echo "No entry";
     }  
 
     //Form for adding entry 
-    session_start();
     if(isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] == true){
         $u_id = $_SESSION['id'];
         echo '
@@ -58,7 +68,6 @@
             }
         }
     }
-    $mysqli->close();               
 ?>
 </div>
 

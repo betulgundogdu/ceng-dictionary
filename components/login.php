@@ -1,6 +1,5 @@
 <?php
 // Initialize the session
-session_start();
 global $mysqli;
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
@@ -20,16 +19,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $entered_password = trim($_POST["password"]);
 
     $dbActions = new DBActions($mysqli); 
-    $result = $dbActions->getUser($entered_username);
-    $u_id = $result[0]['u_id'];                    
-    $username = $result[0]['username'];
-    $password = $result[0]['password'];
+    $result = $dbActions->getUserWithName($entered_username);
+    $user = $result->fetch_assoc();
+    $u_id = $user['u_id'];                    
+    $username = $user['username'];
+    $password = $user['password'];
     $count = count($result);
-
     if($count == 1){
         if(password_verify($entered_password, $password)){
             // Password is correct, so start a new session
-            session_start();
 
             // Store data in session variables
             $_SESSION["loggedin"] = true;
@@ -47,7 +45,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username_err = "No account found with that username.";
     }
 
-    $mysqli->close();
 }
 ?>
 

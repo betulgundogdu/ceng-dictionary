@@ -10,8 +10,11 @@
             $username_err = "Please enter a username.";
         } else{
             $username_param = trim($_POST["username"]);
-            $result = $dbActions->getUser($username_param);
-            $count = count($result);
+            $result = $dbActions->getUserWithName($username_param);
+            var_dump($result);
+            $username_result = $result->fetch_assoc();
+            var_dump($username_result);
+            $count = count($username_result);
             if($count < 1){
                 $username = $username_param;
             }
@@ -52,7 +55,6 @@
                 echo("Something is wrong.");
             }
         }
-        $mysqli->close();
     }
 ?>
 

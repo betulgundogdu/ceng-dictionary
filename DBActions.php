@@ -18,19 +18,40 @@
               echo "Error: " . $this->stmt->error;
               return false;
             }       
-            $this->stmt->close();
         }
+
+        public function removeUser($u_id) {
+            $this->stmt = $this->conn->prepare("DELETE FROM User WHERE u_id = ?");
+            $this->stmt->bind_param("s", $u_id);
+            if ($this->stmt->execute()) {
+              echo "The record deleted successfully";
+              return true;
+            } else {
+              echo "Error: " . $this->stmt->error;
+              return false;
+            }       
+        }
+                
         
-        public function getUser($username){
+        public function getUserWithName($username){
             $this->stmt = $this->conn->prepare("SELECT * FROM User WHERE username = ?");
             $this->stmt->bind_param("s", $username);
             if ($this->stmt->execute()) {
                 $result = $this->stmt->get_result(); // get the mysqli result
-                $resultarr = $result->fetch_assoc();
-                $this->stmt->close();
-                return $resultarr;
+                return $result;
             } else {
-                $this->stmt->close();
+                return false;
+                echo "Error: " . $this->stmt->error;
+            }
+        }
+
+        public function getUserWithId($u_id){
+            $this->stmt = $this->conn->prepare("SELECT * FROM User WHERE u_id = ?");
+            $this->stmt->bind_param("s", $u_id);
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result(); // get the mysqli result
+                return $result;
+            } else {
                 echo "Error: " . $this->stmt->error;
             }
         }
@@ -40,7 +61,7 @@
             $sql = "SELECT c_id, title FROM Category";
             $result = $this->conn->query($sql);
             return $result;
-        }
+        }        
 
         //header operations
         public function addHeader($title, $c_id) {
@@ -49,14 +70,24 @@
             
             if ($this->stmt->execute()) {
               echo "New record created successfully";
-              $this->stmt->close(); 
               return true;
             } else {
               echo "Error: " . $this->stmt->error;
-              $this->stmt->close();
               return false;
             }
         
+        }
+
+        public function removeHeader($h_id) {
+            $this->stmt = $this->conn->prepare("DELETE FROM Header WHERE h_id = ?");
+            $this->stmt->bind_param("s", $h_id);
+            if ($this->stmt->execute()) {
+              echo "The record deleted successfully";
+              return true;
+            } else {
+              echo "Error: " . $this->stmt->error;
+              return false;
+            }       
         }
 
         public function getHeaderWithTitle($title){
@@ -67,10 +98,9 @@
                 return $result;
             } else {
                 echo "Error: " . $this->stmt->error;
-                $this->stmt->close();    
             }
         }
-        
+
         public function getHeaderWithId($h_id){
             $this->stmt = $this->conn->prepare("SELECT * FROM Header WHERE h_id = ?");
             $this->stmt->bind_param("s", $h_id);
@@ -79,7 +109,6 @@
                 return $result;
             } else {
                 echo "Error: " . $this->stmt->error;
-                $this->stmt->close();    
             }
         }        
 
@@ -101,14 +130,25 @@
             $this->stmt->bind_param("ssss", $h_id , $text, $created_date, $u_id);
             
             if ($this->stmt->execute()) {
-              $this->stmt->close();
+            echo "Entry added succesfully";
               return true;
             } else {
               echo "Error: " . $this->stmt->error;
-              $this->stmt->close();
               return false;
             } 
         }
+
+        public function removeEntry($e_id) {
+            $this->stmt = $this->conn->prepare("DELETE FROM Entry WHERE e_id = ?");
+            $this->stmt->bind_param("s", $e_id);
+            if ($this->stmt->execute()) {
+              echo "The record deleted successfully";
+              return true;
+            } else {
+              echo "Error: " . $this->stmt->error;
+              return false;
+            }       
+        }        
 
         public function getAllEntries($h_id){
             $this->stmt = $this->conn->prepare("SELECT * FROM Entry WHERE h_id = ?");
@@ -122,15 +162,74 @@
             }
         }
 
+        public function getEntriesByUserId($u_id){
+            $this->stmt = $this->conn->prepare("SELECT * FROM Entry WHERE u_id = ?");
+            $this->stmt->bind_param("s", $u_id);
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result();
+                return $result;
+            } else {
+                $this->stmt->close();
+                echo "Error: " . $this->stmt->error;
+            }
+        }
+
+        // message operations
+        public function addMessage($text, $sender, $receiver){
+            $created_date = date('Y-m-d H:i:s');
+            $this->stmt = $this->conn->prepare("INSERT INTO Message (text, sender_id, receiver_id, created_date ) VALUES (?, ?, ?, ?)");
+            $this->stmt->bind_param("ssss", $text , $sender, $receiver, $created_date);
+            
+            if ($this->stmt->execute()) {
+            echo "Message sent succesfully";
+              return true;
+            } else {
+              echo "Error: " . $this->stmt->error;
+              return false;
+            } 
+        }
+
+        public function getUsersOnMessage($u_id){
+            $this->stmt = $this->conn->prepare(" SELECT DISTINCT receiver_id FROM Message
+                                                 WHERE sender_id = ? 
+                                                 UNION
+                                                 SELECT DISTINCT sender_id FROM Message
+                                                 WHERE receiver_id = ?
+                                                ");
+            $this->stmt->bind_param("ss", $u_id, $u_id);
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result();
+                return $result;
+            } else {
+                $this->stmt->close();
+                echo "Error: " . $this->stmt->error;
+            }       
+        }
+
+        public function getMessages($u_id){
+            $this->stmt = $this->conn->prepare("SELECT DISTINCT receiver_id FROM Message
+                                                WHERE sender_id = ? OR receiver_id = ?
+                                                ORDER BY created_date");
+            $this->stmt->bind_param("ss", $u_id, $u_id);
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result();
+                return $result;
+            } else {
+                $this->stmt->close();
+                echo "Error: " . $this->stmt->error;
+            }       
+        }
+
         //aux methods
         public function isValidEmail($email){
             $this->stmt = $this->conn->prepare("SELECT u_id FROM User WHERE email = ?");
             $this->stmt->bind_param("s", $email);
             
             if ($this->stmt->execute()) {
-                $this->stmt->store_result();
-                $this->stmt->bind_result($id);
-                $count = $this->stmt-> num_rows;
+                $get_result = $this->stmt->get_result();
+                $result = $get_result->fetch_assoc();
+                $count = count($result);
+                var_dump($count);
                 if($count > 0){
                     return false;
                 }
@@ -140,7 +239,6 @@
             } else {
                 echo "Error: " . $this->stmt->error;
             }
-            $this->stmt->close();
         }  
     }
 ?>

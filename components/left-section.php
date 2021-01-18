@@ -1,4 +1,5 @@
 <?php
+    $username = $_SESSION['username'];
     $dbActions = new DBActions($mysqli);
     $category = $_GET['category'];
     if($category == ""){
@@ -31,7 +32,6 @@
             <div class="settings">
             <?php
                 // Initialize the session
-                session_start();
                 
                 // Check if the user is logged in, if not then redirect him to login page
                 if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
@@ -42,13 +42,13 @@
                 } else {
                     echo '
                         <div class="item">
-                            <a href="#" class="icon">
+                            <a href="?page=messages" class="icon">
                                 <ion-icon name="chatbox-outline"></ion-icon>
                                 <!-- <ion-icon name="chatbox"></ion-icon> -->
                             </a>
                         </div> 
                         <a class="item" href="?page=add-header">yeni başlık</a>
-                        <a class="item">profilim</a>
+                        <a class="item" href="?page=profil&user='. $username . '">profilim</a>
                         <a class="item" href="?page=logout">çıkış</a>  
                     ';
                 }
@@ -66,7 +66,6 @@
                 } else {    
                     echo "0 results";
                 }  
-                $mysqli->close();               
             ?>
 
         </ul>

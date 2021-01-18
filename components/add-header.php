@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 // Check if the user is already logged in, if yes then redirect him to welcome page
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
@@ -38,11 +37,11 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
         $selected_category =(int)$_POST["selected-category"];
         $dbActions->addHeader($header_title, $selected_category);
         
-        $header_info = $dbActions->getHeaderWithTitle($header_title);
-        $h_id = $header_info['h_id'];
+        $result = $dbActions->getHeaderWithTitle($header_title);
+        $header_info = $result->fetch_assoc();
+        $h_id = $header_info["h_id"];
         $dbActions->addEntry($h_id, $entry_text, $u_id);     
     }
-    $mysqli->close();
 } 
 
 
