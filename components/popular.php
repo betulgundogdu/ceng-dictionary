@@ -15,7 +15,7 @@
                 $entry_username = $entry_user_info['username'];
                 echo '
                 <div class="entry">
-                    <a href="?page=entry&category=' . $c_id . '&baslik='. $last_entry_info['e_id'] .'"> ' . $header_info['title'] . ' </a>
+                    <a href="?page=entry&category=' . $c_id . '&baslik='. $h_id .'"> ' . $header_info['title'] . ' </a>
                     <p class="entry-text"> ' . $last_entry_info['text'] . '</p>
                     <div class="right detail">
                         <a class="username" href="?page=profil&user=' . $entry_user_info . '">'. $entry_username . '</a>

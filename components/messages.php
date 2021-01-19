@@ -21,13 +21,3 @@
     
     
 </div>
-<div class="page-count">
-    <select>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-    </select> / 
-    <button class="last-page">3</button>
-    <button class="next-page">></button>
-</div>
-</div>

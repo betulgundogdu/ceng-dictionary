@@ -14,6 +14,7 @@ require_once(__DIR__.'/DBActions.php');
     <title> ceng dictionary </title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/index.js"></script>
     <script src="https://unpkg.com/ionicons@5.2.3/dist/ionicons.js"></script>
 </head>
 <body>

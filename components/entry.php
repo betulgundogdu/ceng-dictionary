@@ -20,7 +20,8 @@
 <div class="entries">
 <?php
     $entries = $dbActions->getAllEntries($h_id);
-    if ($entries->num_rows > 0) {
+    $total_rows =$entries->num_rows ;
+    if ($total_rows > 0) {
         while($row = $entries->fetch_assoc()) {
             $uid_owner = $row['u_id'];
             $user_result = $dbActions->getUserWithId($uid_owner);
@@ -51,7 +52,7 @@
         echo '
         <form class="entry-form" method="POST">  <!-- sadece üyeler-->
             <label for="lname">entry gir:</label><br/>
-            <textarea id="entry" name="entry" rows="10" cols="30"></textarea><br/>
+            <textarea id="entry" name="entry" rows="8" cols="30"></textarea><br/>
             <input type="submit" value="gönder"/>
         </form> '; 
     }
@@ -69,16 +70,4 @@
         }
     }
 ?>
-</div>
-
-<div class="page-count">
-    <select>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-    </select> / 
-    <button class="last-page">5</button>
-    <button class="next-page">></button>
 </div>

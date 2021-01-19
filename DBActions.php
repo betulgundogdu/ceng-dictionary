@@ -6,7 +6,7 @@
             $this->stmt = $this->conn->stmt_init();
         }
 
-        //user operations
+        // USER OPERATIONS
         public function addUser($username, $email, $password) {
             $date = date('Y-m-d');
             $this->stmt = $this->conn->prepare("INSERT INTO User (username, email, password, created_at) VALUES (?, ?, ?, ?)");
@@ -31,8 +31,7 @@
               return false;
             }       
         }
-                
-        
+                    
         public function getUserWithName($username){
             $this->stmt = $this->conn->prepare("SELECT * FROM User WHERE username = ?");
             $this->stmt->bind_param("s", $username);
@@ -55,15 +54,30 @@
                 echo "Error: " . $this->stmt->error;
             }
         }
-        
-        //category operations
+
+        public function updateUserType($u_id, $new_type){
+            $this->stmt = $this->conn->prepare("UPDATE User
+                                                SET type = ?
+                                                WHERE u_id = ?");
+            $this->stmt->bind_param("ss", $new_type, $u_id);
+            if ($this->stmt->execute()) {
+                echo "The record updated successfully";
+                return true;
+            } else {
+                echo "Error: " . $this->stmt->error;
+                return false;
+            }
+        }
+
+
+        //CATEGORY OPERATIONS
         public function getAllCategories(){
             $sql = "SELECT c_id, title FROM Category";
             $result = $this->conn->query($sql);
             return $result;
         }        
 
-        //header operations
+        //HEADER OPERATIONS
         public function addHeader($title, $c_id) {
             $this->stmt = $this->conn->prepare("INSERT INTO Header (title, c_id) VALUES (?, ?)");
             $this->stmt->bind_param("si", $title, $c_id);
@@ -88,6 +102,20 @@
               echo "Error: " . $this->stmt->error;
               return false;
             }       
+        }
+
+        public function updateHeader($h_id, $new_title){
+            $this->stmt = $this->conn->prepare("UPDATE Header
+                                                SET title = ?
+                                                WHERE h_id = ?");
+            $this->stmt->bind_param("ss", $new_title, $h_id);
+            if ($this->stmt->execute()) {
+                echo "The record updated successfully";
+                return true;
+            } else {
+                echo "Error: " . $this->stmt->error;
+                return false;
+            }
         }
 
         public function getHeaderWithTitle($title){
@@ -139,7 +167,7 @@
             } 
         }
         
-        //entry operations
+        //ENTRY OPERATIONS
         public function addEntry($h_id, $text, $u_id) {
             $created_date = date('Y-m-d');
             $this->stmt = $this->conn->prepare("INSERT INTO Entry (h_id, text, created_date, u_id ) VALUES (?, ?, ?, ?)");
@@ -164,7 +192,22 @@
               echo "Error: " . $this->stmt->error;
               return false;
             }       
-        }        
+        }     
+        
+        public function updateEntry($e_id, $new_text){
+            $this->stmt = $this->conn->prepare("UPDATE Entry
+                                                SET text = ?
+                                                WHERE e_id = ?");
+            $this->stmt->bind_param("ss", $new_text, $e_id);
+            if ($this->stmt->execute()) {
+                echo "The record updated successfully";
+                return true;
+            } else {
+                echo "Error: " . $this->stmt->error;
+                return false;
+            }
+            
+        }
 
         public function getAllEntries($h_id){
             $this->stmt = $this->conn->prepare("SELECT * FROM Entry WHERE h_id = ?");
@@ -206,7 +249,7 @@
             }  
         }
 
-        // message operations
+        // MESSAGE OPERATIONS
         public function addMessage($text, $sender, $receiver){
             $created_date = date('Y-m-d H:i:s');
             $this->stmt = $this->conn->prepare("INSERT INTO Message (text, sender_id, receiver_id, created_date ) VALUES (?, ?, ?, ?)");
@@ -257,7 +300,7 @@
             }       
         }
 
-        //aux methods
+        //HELPER METHODS
         public function isValidEmail($email){
             $this->stmt = $this->conn->prepare("SELECT u_id FROM User WHERE email = ?");
             $this->stmt->bind_param("s", $email);

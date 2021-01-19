@@ -5,16 +5,46 @@
     $user_info = $user->fetch_assoc();
     $user_id = $user_info['u_id'];
     $entries_result = $dbActions->getEntriesByUserId($user_id);
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $flag = true;
+        $auth = $_POST["auth"];
+        $delete = $_POST["delete"];
+        $username = $_GET['user'];
+        $user = $dbActions->getUserWithName($username);
+        $user_info = $user->fetch_assoc();
+        $u_id = $user_info['u_id'];
+        if($auth){
+            $result = $dbActions->updateUserType($u_id, 'mod');
+            if($result){
+                header('index.php');
+            }
+        }
+
+        if($delete){
+            $result = $dbActions->removeUser($u_id);
+            if($result){
+                header('index.php');
+            }
+        }
+    }
+
  ?>
  
 <div class="title info"> 
     <div><?php echo($profil_owner) ?></div>
-    <?php
-    if($current_user_type == 'admin' && $session_username != $profil_owner){ 
-        echo '
-        <button type="button" class="edit"> yetkilendir </a> | <button type="button" class="edit"> banla</a> <!-- sadece admin--> ';
-    }
-    ?>
+    <?php if($current_user_type == 'admin' && $session_username != $profil_owner): ?> 
+        <form method="POST">
+            <input type=checkbox name="auth"/>
+            <span class="edit">yetkilendir</span> |
+            <input type=checkbox name="delete"/>
+            <span  class="edit">sil</span> 
+            <button type="submit" > gönder </button> 
+        </form>
+        
+
+    <?php endif; ?>
+
 </div>
 <div class="entries">
     <?php
@@ -39,4 +69,6 @@
             </div> ';
         }
     ?>
+</div>
+
 </div>

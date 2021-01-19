@@ -41,6 +41,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.checkbox input[type="checkbox"] {
+    opacity: 0;
+}
+
 button {
     cursor: pointer;
     background-color: transparent;
@@ -254,9 +258,26 @@ button {
  }
 
  .right.container > .info {
-     height: 10% !important;
-     color: var(--yellow);
- }
+    height: 10% !important;
+    color: var(--yellow);
+}
+
+.info > form {
+    display:inline-block;
+}
+
+
+.info > form > span{
+    color: white;
+    margin:0;
+    padding:0;
+}
+
+.info > form > input {
+    color: white;
+    margin:0;
+    padding:0;
+}
 
  .info > .edit {
     margin:5px 0;
@@ -363,8 +384,11 @@ button {
 
 .popular > .entry {
     width: 25%;
-    height: 25% !important;
+    height: 22% !important;
     margin: 5px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
 }
 
 .popular > .entry > a {
@@ -689,6 +713,44 @@ button {
     height:40px;
 }
 
+.modal{
+    display:none;
+    position: fixed; /* Stay in place */
+    width:40%;
+    height:25%;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    margin:auto;
+    background-color: var(--light-blue);
+    color: var(--white);
+    z-index:999;
+    align-items:center;
+    justify-content: center;
+    box-shadow: 10px 10px 10px #000;
+}
+
+.close{
+    position:absolute;
+    top:0;
+    right:2%;
+    font-size:22px;
+    font-weight:bold;
+}
+
+.btn {
+    font-weight:bold;
+    border:1px solid var(--yellow);
+}
+
+/* Clear floats */
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
 .help-block {
     color:red;
 }
@@ -725,7 +787,7 @@ button {
   }
 
 
-@media only screen and (max-width: 960px) {
+@media only screen and (max-width: 720px) {
     body {
         font-size:12px;
     }
@@ -743,5 +805,8 @@ button {
     }
     .right.container{
         width: 100%;
+    }
+    .popular > .entry {
+        width:100%;
     }
   }
