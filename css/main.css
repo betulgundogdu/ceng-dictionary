@@ -389,16 +389,25 @@ button {
     display:flex;
     flex-direction:column;
     justify-content:center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .popular > .entry > a {
     letter-spacing: 1px;
     font-size: 14px;
     font-weight: bold;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 } 
 
 .popular > .entry > p {
     font-size: 12px;
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
