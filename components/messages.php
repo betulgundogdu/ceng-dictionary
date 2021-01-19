@@ -5,7 +5,7 @@
 </div>
 <div class="messages">
     <?php
-        $result = $dbActions->getDistinctMessages($session_uid);
+        $result = $dbActions->getUsersOnMessage($session_uid);
         while($row = $result -> fetch_assoc()){
             $receiver_id = $row['receiver_id'];
             $receiver = $dbActions->getUserWithId($receiver_id);

@@ -201,22 +201,27 @@
                 $result = $this->stmt->get_result();
                 return $result;
             } else {
-                $this->stmt->close();
                 echo "Error: " . $this->stmt->error;
+                $this->stmt->close();
+
             }       
         }
 
-        public function getMessages($u_id){
-            $this->stmt = $this->conn->prepare("SELECT DISTINCT receiver_id FROM Message
-                                                WHERE sender_id = ? OR receiver_id = ?
+        public function getMessages($current_uid,$msg_uid ){
+            $this->stmt = $this->conn->prepare(" SELECT * FROM Message
+                                                WHERE sender_id = ? AND receiver_id = ?
+                                                UNION
+                                                SELECT * FROM Message
+                                                WHERE sender_id = ? AND receiver_id = ?
                                                 ORDER BY created_date");
-            $this->stmt->bind_param("ss", $u_id, $u_id);
+            $this->stmt->bind_param("ssss", $current_uid, $msg_uid, $msg_uid, $current_uid);
             if ($this->stmt->execute()) {
                 $result = $this->stmt->get_result();
                 return $result;
             } else {
-                $this->stmt->close();
                 echo "Error: " . $this->stmt->error;
+                $this->stmt->close();
+
             }       
         }
 
