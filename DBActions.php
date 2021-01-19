@@ -122,6 +122,22 @@
                 echo "Error: " . $this->stmt->error;
             }
         }
+
+        public function getPopularHeaders(){
+            $this->stmt = $this->conn->prepare("SELECT h_id
+                                                FROM Entry
+                                                GROUP BY h_id
+                                                ORDER BY COUNT(h_id)
+                                                DESC
+                                                LIMIT 9;
+                                                ");
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result();
+                return $result;
+            } else {
+                echo "Error: " . $this->stmt->error;
+            } 
+        }
         
         //entry operations
         public function addEntry($h_id, $text, $u_id) {
@@ -172,6 +188,22 @@
                 $this->stmt->close();
                 echo "Error: " . $this->stmt->error;
             }
+        }
+
+        public function getLastEntry($h_id){
+            $this->stmt = $this->conn->prepare("SELECT * FROM Entry
+                                                WHERE h_id = ?
+                                                ORDER BY e_id
+                                                DESC
+                                                LIMIT 1");
+            $this->stmt->bind_param("s", $h_id);
+            if ($this->stmt->execute()) {
+                $result = $this->stmt->get_result();
+                return $result;
+            } else {
+                $this->stmt->close();
+                echo "Error: " . $this->stmt->error;
+            }  
         }
 
         // message operations
@@ -233,8 +265,7 @@
             if ($this->stmt->execute()) {
                 $get_result = $this->stmt->get_result();
                 $result = $get_result->fetch_assoc();
-                $count = count($result);
-                var_dump($count);
+                $count = $result->num_rows;
                 if($count > 0){
                     return false;
                 }

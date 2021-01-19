@@ -20,7 +20,7 @@
 <div class="entries">
 <?php
     $entries = $dbActions->getAllEntries($h_id);
-    if (count($entries) > 0) {
+    if ($entries->num_rows > 0) {
         while($row = $entries->fetch_assoc()) {
             $uid_owner = $row['u_id'];
             $user_result = $dbActions->getUserWithId($uid_owner);

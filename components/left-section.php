@@ -27,7 +27,7 @@
                 }      
             ?>
             <!-- <div class="item"><a href="category.html"> daha fazla </a></div>  -->
-            <div class="item"><button type="submit" class="icon"><ion-icon name="search-sharp" ></ion-icon></button></div>
+            <div class="item"><a href="?page=search" class="icon"><ion-icon name="search-sharp" ></ion-icon></button></div>
             </div>
             <div class="settings">
             <?php
@@ -59,7 +59,7 @@
         <ul class="subjects">
             <?php 
                 $result = $dbActions->getAllHeaders($category);
-                if (count($result) > 0) {
+                if ($result->num_rows > 0) {
                     while($row = $result -> fetch_assoc()) {
                         echo  "<li class='item '><a href='?page=entry&category=". $category ."&baslik=". $row['h_id'] . "'> >   " . $row['title'] . "</a></li>";
                     }

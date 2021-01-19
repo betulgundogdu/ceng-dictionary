@@ -33,7 +33,7 @@
                     echo'
                     <div class="message lighter">
                     <p class="message-text"> '. $msg . '</p>
-                    <span class="time-right"> ' . $msg_date . '</span>
+                    <span class="time time-right"> ' . $msg_date . '</span>
                     </div>
                     ';
                 }
@@ -42,7 +42,7 @@
                     echo '
                     <div class="message">
                     <p class="message-text">'. $msg . '</p>
-                    <span class="time-right">' . $msg_date . '</span>
+                    <span class="time time-left">' . $msg_date . '</span>
                     </div> ';
                 }
             }

@@ -14,7 +14,7 @@
             var_dump($result);
             $username_result = $result->fetch_assoc();
             var_dump($username_result);
-            $count = count($username_result);
+            $count = $username_result->num_rows;
             if($count < 1){
                 $username = $username_param;
             }

@@ -1,32 +1,29 @@
+  
     <div class="popular">
-        <div class="item">
-            <a href="?page=entry"> deneme bir ki </a>
-            <p class="entry"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus. </p>
-            <div class="right detail"><span class="username">username</span><span class="time"> 06.03.23 23:21</span></div>
-        </div>
-        <div class="item">
-            <a href="?page=entry"> deneme bir kideneme bir ki </a>
-            <p class="entry"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus.</p>
-            <div class="right detail"><span class="username">username</span><span class="time"> 06.03.23 23:21</span></div>
-        </div>
-        <div class="item">
-            <a href="?page=entry"> deneme bir kideneme bir ki </a>
-            <p class="entry"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus.</p>
-            <div class="right detail"><span class="username">username</span><span class="time"> 06.03.23 23:21</span></div>
-        </div>
-        <div class="item">
-            <a href="?page=entry"> #deneme bir kideneme bir ki</a>
-            <p class="entry"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus.</p>
-            <div class="right detail"><span class="username">username</span><span class="time"> 06.03.23 23:21</span></div>
-        </div>
-        <div class="item">
-            <a href="?page=entry"> deneme bir kideneme bir ki </a>
-            <p class="entry"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus.</p>
-            <div class="right detail"><span class="username">username</span><span class="time"> 06.03.23 23:21</span></div>
-        </div>
-        <div class="item">
-            <a href="?page=entry"> deneme bir kideneme bir ki deneme bir kideneme bir ki</a>
-            <p class="entry"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sollicitudin ligula vitae ante pretium auctor. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Duis aliquam auctor eros, eget lacinia tortor ornare non. Nunc mauris mi, tristique eget consequat quis, convallis a neque. Vivamus fermentum vehicula ligula, et hendrerit justo. Mauris ante lorem, sodales vitae lacus cursus, bibendum varius neque. Nunc metus turpis, bibendum at egestas et, sodales fringilla metus.</p>
-            <div class="right detail"><span class="username">username</span><span class="time"> 06.03.23 23:21</span></div>
-        </div>
+        <?php
+            $popular = $dbActions->getPopularHeaders();
+            while($row = $popular->fetch_assoc()){
+                $h_id = $row['h_id'];
+                $header = $dbActions->getHeaderWithId($h_id);
+                $header_info = $header->fetch_assoc();
+                $h_title = $header_info['title'];
+                $c_id = $header_info['c_id'];
+                $last_entry = $dbActions->getLastEntry($h_id);
+                $last_entry_info = $last_entry->fetch_assoc();
+                $entry_user = $dbActions->getUserWithId($last_entry_info['u_id']);
+                $entry_user_info = $entry_user->fetch_assoc();
+                $entry_username = $entry_user_info['username'];
+                echo '
+                <div class="entry">
+                    <a href="?page=entry&category=' . $c_id . '&baslik='. $last_entry_info['e_id'] .'"> ' . $header_info['title'] . ' </a>
+                    <p class="entry-text"> ' . $last_entry_info['text'] . '</p>
+                    <div class="right detail">
+                        <a class="username" href="?page=profil&user=' . $entry_user_info . '">'. $entry_username . '</a>
+                        <span class="time"> ' . $last_entry_info['created_date'] . '</span>
+                    </div>
+                </div>
+                ';
+            }
+        ?>
+
     </div>

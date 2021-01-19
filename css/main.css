@@ -267,7 +267,6 @@ button {
  .profil {
      width: 90%;
      height: 90%;
-
  }
  
  .entries {
@@ -283,13 +282,14 @@ button {
  .entry {
     display:inline-block;
     height: auto;
-    width: 95%;
+    width: 80%;
     padding-right: 5%;
     padding: 5px 10px;
     margin:10px 0px;
     text-align: left;
+    background-color: var(--light-blue);
     border:1px solid var(--light-blue);
-    box-shadow: 2px 2px 8px var(--light-blue);
+    box-shadow: 3px 3px 6px #000;
  }
 
  .entry > .detail {
@@ -310,8 +310,8 @@ button {
     font-size: 12px;
  }
 
- .time {
-     font-size: 12px;
+.time {
+     font-size: 10px;
  }
 
 .header{
@@ -353,29 +353,27 @@ button {
 } 
 
 .popular {
-    height: 100%;
-    width: 95%;
+    height: 90%;
+    width: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     display:flex;
     flex-wrap:wrap;
 }
 
-.popular > .item {
-    width: 30%;
-    height: auto;
-    margin: 25px 5px;
+.popular > .entry {
+    width: 25%;
+    height: 25% !important;
+    margin: 5px;
 }
 
-.popular > .item > a {
-    margin: 10px;
+.popular > .entry > a {
+    letter-spacing: 1px;
     font-size: 14px;
     font-weight: bold;
 } 
 
-.popular > .item > p {
-    margin: 5px;
-    padding: 5px;
+.popular > .entry > p {
     font-size: 12px;
 }
 
@@ -534,7 +532,7 @@ button {
 
 .messages > .item > .time {
     margin: 10px;
-    font-size: 14px;    
+    font-size: 10px;    
     font-weight: bold;
     float:right;
     text-align:center;
@@ -596,6 +594,7 @@ button {
   text-align:right;
 }
 
+
 .message::after {
   content: "";
   clear: both;
@@ -607,6 +606,8 @@ button {
   color: #aaa;
   margin:0;
   padding:0;
+  font-size:10px;
+
 }
 
 .time-left {
@@ -614,6 +615,7 @@ button {
   color: #999;
   margin:0;
   padding:0;
+  font-size:10px;
 }
 
 .send-message{
@@ -651,6 +653,41 @@ button {
     padding:5px;
 }
 
+.search-area{
+    width:95%;
+    height:95%;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.search-area > .title{
+    font-size:16px;
+    color: var(--yellow);
+    font-weight:bold;
+}
+
+.search_form {
+    width:100%;
+    height:100%;    
+    border:1px solid green;
+    margin:0;
+    padding:0;
+}
+
+.search-form > input {
+    width:400px;
+    height:25px;
+    margin:10px 0;
+    padding: 5px;
+}
+
+.search-form > button {
+    border:1px solid var(--yellow);
+    margin:10px;
+    width:60px;
+    height:40px;
+}
 
 .help-block {
     color:red;

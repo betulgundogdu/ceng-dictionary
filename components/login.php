@@ -24,7 +24,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $u_id = $user['u_id'];                    
     $username = $user['username'];
     $password = $user['password'];
-    $count = count($result);
+    $count = $result->num_rows;
     if($count == 1){
         if(password_verify($entered_password, $password)){
             // Password is correct, so start a new session
