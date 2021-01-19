@@ -21,7 +21,6 @@ require_once(__DIR__.'/DBActions.php');
         <div class="content">
             <?php 
                 require('components/left-section.php');
-
             ?>
             <div class="right container">
                 <?php 

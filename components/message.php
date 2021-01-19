@@ -4,6 +4,19 @@
     $msg_user_info = $msg_user->fetch_assoc();
     $msg_uid = $msg_user_info['u_id'];   
     $all_messages = $dbActions->getMessages($session_uid, $msg_uid);
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $receiver_username = $_GET['user'];
+        $text = $_POST['send-msg'];
+        $result = $dbActions->getUserWithName($receiver_username);
+
+        $result_info = $result->fetch_assoc();
+        $receiver_id = $result_info['u_id'];
+        $dbActions->addMessage($text, $session_uid, $receiver_id);
+        header("location: index.php");               
+    }
+
+
 ?>
 
 <div class="messaging-wrapper">
@@ -32,11 +45,11 @@
                     <span class="time-right">' . $msg_date . '</span>
                     </div> ';
                 }
-            } 
+            }
         ?>
     </div>
-    <div class="send-message">
+    <form class="send-message" method= "POST">
         <textarea id="send-msg" name="send-msg" rows="4" cols="58"  required></textarea><br/>
         <button type="submit" value="Submit">gönder</button>
-    </div>
+    </form>
 </div>
